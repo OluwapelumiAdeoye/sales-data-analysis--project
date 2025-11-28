@@ -34,7 +34,7 @@ df = df.set_index("Sale_Date")
 df_sorted_date = df.sort_values("Sale_Date")
 
 
-
+ 
 
 #Total Net Revenue (Daily, Weekly and Monthly)
 daily_net_revenue = df_sorted_date.resample("D")["Net_Revenue"].sum()
@@ -178,140 +178,140 @@ monthly_neg_profit = neg_profit.resample("ME").sum()
 
 
 
-# #Seaborn Visualisation
-# #--Line plot chart--
-# fig, axes = plt.subplots(2, 1, figsize=(12, 6))
+#Seaborn Visualisation
+#--Line plot chart--
+fig, axes = plt.subplots(2, 1, figsize=(12, 6))
 
-# sns.lineplot(x=monthly_net_revenue.index, y=monthly_net_revenue.values, ax=axes[0])
-# axes[0].set_title("Monthly Revenue Trend")
-# axes[0].set_xlabel("Month")
-# axes[0].set_ylabel("Monthly Net Revenue")
+sns.lineplot(x=monthly_net_revenue.index, y=monthly_net_revenue.values, ax=axes[0])
+axes[0].set_title("Monthly Revenue Trend")
+axes[0].set_xlabel("Month")
+axes[0].set_ylabel("Monthly Net Revenue")
 
-# sns.lineplot(data=df_sorted_date, x="Sale_Date", y="7D_rolling_avg", ax=axes[1])
-# axes[1].set_title("7-Day Net Revenue Trend")
-# axes[1].set_xlabel("Sale Date")
-# axes[1].set_ylabel("7D Average")
-
-
-# plt.subplots_adjust(hspace=0.5)
-
-# import matplotlib.ticker as ticker
-
-# # Rotate x-axis labels
-# for ax in axes:
-#     ax.xaxis.set_major_locator(plt.MaxNLocator(10))
-#     ax.yaxis.set_major_locator(ticker.MaxNLocator(6))
-#     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f'{int(x):,}'))
-#     for label in ax.get_xticklabels():
-#         label.set_rotation(0)
-#         #label.set_horizontalalignment('right')
+sns.lineplot(data=df_sorted_date, x="Sale_Date", y="7D_rolling_avg", ax=axes[1])
+axes[1].set_title("7-Day Net Revenue Trend")
+axes[1].set_xlabel("Sale Date")
+axes[1].set_ylabel("7D Average")
 
 
-# plt.tight_layout()
-# plt.show()
-# plt.close("all")
+plt.subplots_adjust(hspace=0.5)
 
-# #--End of Line plot chart --
+import matplotlib.ticker as ticker
 
-
-
-# #--Bar chart visualization (1)--
-# plt.figure(figsize=(10, 6))
-
-# sns.barplot(
-#     x=top_prod_by_Net_Revenue.index,
-#     y=top_prod_by_Net_Revenue.values
-# )
-
-# plt.title("Top Products by Revenue")
-# plt.xlabel("Product")
-# plt.ylabel("Total Net Revenue")
+# Rotate x-axis labels
+for ax in axes:
+    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
+    ax.yaxis.set_major_locator(ticker.MaxNLocator(6))
+    ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f'{int(x):,}'))
+    for label in ax.get_xticklabels():
+        label.set_rotation(0)
+        #label.set_horizontalalignment('right')
 
 
-# import matplotlib.ticker as ticker
-# plt.gca().yaxis.set_major_formatter(
-#     ticker.FuncFormatter(lambda x, pos: f'{int(x):,}')
-# )
+plt.tight_layout()
+plt.show()
+plt.close("all")
 
-
-# ax = plt.gca()
-# ax.set_ylim(0, top_prod_by_Net_Revenue.max() * 1.1)   # 10% extra space for y axis
-# ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins=6))
-
-
-# plt.xticks(rotation=0) 
-# plt.tight_layout()
-# plt.show()
-
-# #--End of barchart visualization (1)
+#--End of Line plot chart --
 
 
 
-# #--Bar chart visualization (2)
-# plt.figure(figsize=(10, 6))
+#--Bar chart visualization (1)--
+plt.figure(figsize=(10, 6))
 
-# sns.barplot(
-#     x=total_profit_region.index,
-#     y=total_profit_region.values
-# )
+sns.barplot(
+    x=top_prod_by_Net_Revenue.index,
+    y=top_prod_by_Net_Revenue.values
+)
 
-# plt.title("Top profits per region")
-# plt.xlabel("Region")
-# plt.ylabel("Profit")
-
-
-# import matplotlib.ticker as ticker
-# plt.gca().yaxis.set_major_formatter(
-#     ticker.FuncFormatter(lambda x, pos: f'{int(x):,}')
-# )
-
-# ax = plt.gca()
-# ax.set_ylim(0, total_profit_region.max() * 1.1)   # 10% extra space for y axis
-# ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins=7))
-
-# plt.xticks(rotation=0)
-# #plt.ticklabel_format(style='plain', axis='y')  
-# plt.tight_layout()
-# plt.show()
-
-# #--End of Bar Chart visualization (2)
+plt.title("Top Products by Revenue")
+plt.xlabel("Product")
+plt.ylabel("Total Net Revenue")
 
 
-# #--Pie Chart Visualization (1)--
-
-# plt.figure(figsize=(8,8))
-
-# plt.pie(
-#         sales_by_channel.values,
-#         labels=sales_by_channel.index,
-#         autopct="%1.1f%%",
-#         startangle=90,
-# )
-
-# plt.title("Sales distribution by sales channels")
-# plt.show()
-
-# #--End of pie chart visualization (1) --
+import matplotlib.ticker as ticker
+plt.gca().yaxis.set_major_formatter(
+    ticker.FuncFormatter(lambda x, pos: f'{int(x):,}')
+)
 
 
-# #Start of Pie chart visulaization (2)
-# plt.figure(figsize=(8,8))
-
-# plt.pie(
-#         sales_by_customer_type.values,
-#         labels=sales_by_customer_type.index,
-#         autopct="%1.1f%%",
-#         startangle=90,
-# )
-
-# plt.title("Sales distribution by customer type")
-# plt.show()
-
-# #--End of pie chart visualization (2)--
+ax = plt.gca()
+ax.set_ylim(0, top_prod_by_Net_Revenue.max() * 1.1)   # 10% extra space for y axis
+ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins=6))
 
 
-# #Fill empty values with NaN
-# df_sorted_date.fillna(pd.NA)
-# df_sorted_date.to_csv("data_summary_01.csv", index=False)
+plt.xticks(rotation=0) 
+plt.tight_layout()
+plt.show()
+
+#--End of barchart visualization (1)
+
+
+
+#--Bar chart visualization (2)
+plt.figure(figsize=(10, 6))
+
+sns.barplot(
+    x=total_profit_region.index,
+    y=total_profit_region.values
+)
+
+plt.title("Top profits per region")
+plt.xlabel("Region")
+plt.ylabel("Profit")
+
+
+import matplotlib.ticker as ticker
+plt.gca().yaxis.set_major_formatter(
+    ticker.FuncFormatter(lambda x, pos: f'{int(x):,}')
+)
+
+ax = plt.gca()
+ax.set_ylim(0, total_profit_region.max() * 1.1)   # 10% extra space for y axis
+ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins=7))
+
+plt.xticks(rotation=0)
+#plt.ticklabel_format(style='plain', axis='y')  
+plt.tight_layout()
+plt.show()
+
+#--End of Bar Chart visualization (2)
+
+
+#--Pie Chart Visualization (1)--
+
+plt.figure(figsize=(8,8))
+
+plt.pie(
+        sales_by_channel.values,
+        labels=sales_by_channel.index,
+        autopct="%1.1f%%",
+        startangle=90,
+)
+
+plt.title("Sales distribution by sales channels")
+plt.show()
+
+#--End of pie chart visualization (1) --
+
+
+#Start of Pie chart visulaization (2)
+plt.figure(figsize=(8,8))
+
+plt.pie(
+        sales_by_customer_type.values,
+        labels=sales_by_customer_type.index,
+        autopct="%1.1f%%",
+        startangle=90,
+)
+
+plt.title("Sales distribution by customer type")
+plt.show()
+
+#--End of pie chart visualization (2)--
+
+
+#Fill empty values with NaN
+df_sorted_date.fillna(pd.NA)
+df_sorted_date.to_csv("data_summary_01.csv", index=False)
 
 
