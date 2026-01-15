@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+#Read data source: sample_sales_data.csv
 df = pd.read_csv(
                 "sample_sales_data.csv",
                 skipinitialspace=True,
